@@ -3,8 +3,8 @@
 *
 * 1. Global Binding, when in the global scope, the value of "this" will be the window/console Object
 * 2. Implicit Binding, whenever a function is called by a dot, the object that is on the left will get 'this'.
-* 3. New Binding, 
-* 4. Explicit Binding,
+* 3. New Binding, whenever a constructor is used, 'this' refers to the specific instance of the object that is created and returned by the constructor function.
+* 4. Explicit Binding, whenever the JevaScript's call or apply method is used, 'this' is explicitly defined.
 *
 * write out a code example of each explanation above
 */
@@ -37,16 +37,16 @@ myName.sayHey('Heather');
 // code example for New Binding
 
 function MyFunction(greeter) {
-    this.greeting = 'Hello',
+    this.greeting = 'Hello';
     this.greeter = greeter;
     this.speak = function() {
-        console.log(this.greeting + this.greeter);
+        console.log(`${this.greeting} ${this.greeter}`);
         console.log(this)
     };
 }
 
-let heather = new MyFunction('Kinslow');
-let kinslow = new MyFunction('Heather');
+const heather = new MyFunction('Kinslow');
+const kinslow = new MyFunction('Heather');
 
 heather.speak();
 kinslow.speak();
@@ -54,3 +54,6 @@ kinslow.speak();
 // Principle 4
 
 // code example for Explicit Binding
+
+heather.speak.apply(kinslow);
+kinslow.speak.apply(heather);
